@@ -6,7 +6,7 @@ metadata:
   labels:
     app: traefik-v2
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: traefik-v2
@@ -78,7 +78,7 @@ metadata:
   name: traefik-v2
   namespace: kube-system
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: traefik-v2
   ports:
