@@ -1,0 +1,15 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: nginx-route
+  annotations:
+    kubernetes.io/ingress.class: traefik-v2.5
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`www.iscas.com`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: nginx-service
+          port: 80

@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test-ingress-01
+  annotations:
+    kubernetes.io/ingress.class: traefik-v2.5
+spec:
+  defaultBackend:
+    service:
+      name : traefik-v2
+      port:
+        number: 8090
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name : traefik-v2
+                port:
+                  number: 8090
+      host: vpc123.test.com

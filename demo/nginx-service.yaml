@@ -1,0 +1,36 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  labels:
+    app: nginx-deployment-test-04
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+      nodePort: 32001
+  selector:
+    app: nginx-deployment-test-04
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment-04
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-deployment-test-04
+  template:
+    metadata:
+      labels:
+        app: nginx-deployment-test-04
+    spec:
+      containers:
+        - name: nginx-deployment-test-04
+          image: nginx:1.20
+          ports:
+            - containerPort: 80

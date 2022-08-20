@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test-ingress-01
+  annotations:
+    kubernetes.io/ingress.class: traefik-v2.5
+spec:
+  defaultBackend:
+    service:
+      name : default-http-backend
+      port:
+        number: 80
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name : nginx-service
+                port:
+                  number: 80
+      host: www.iscas.com
